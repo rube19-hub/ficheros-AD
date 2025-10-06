@@ -1,17 +1,21 @@
 package controlador;
 
+import vista.Consola;
 import vista.Escaner;
 
 public class ControladorIncidencias {
 
     public static void inciar(){
 
-        String nombreDelUsuario= Escaner.leerTexto("Nombre del usuario");
+        String nombreDelUsuario= Escaner.leerTexto("Nombre del usuario: ");
+        System.out.println("Bienvenido, " + nombreDelUsuario + "!" );
 
+        Consola.primerPedir();
+    }
 
-            System.out.println("\n=== MENU DE CONTROL DE INCIDENCIAS ===");
-            System.out.println("1. Introducir datos");
-            System.out.println("2. Buscar indicencia por usuario");
-            System.out.println("3. Buscar incidencia por fecha");
+    public static void introducirDatos(){
+
+        int dato = Escaner.leerEntero("Introduce un número: ");
+
     }
 }

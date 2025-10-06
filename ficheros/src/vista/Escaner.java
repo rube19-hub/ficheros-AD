@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Escaner {
     private static Scanner scanner = new Scanner(System.in);
 
+    public static String leerTexto(String mensaje) {
+        System.out.print(mensaje);
+        return scanner.nextLine();
+    }
+
     public static int leerEntero(String mensaje) {
         System.out.print(mensaje);
         while (!scanner.hasNextInt()) {
@@ -17,8 +22,4 @@ public class Escaner {
         return valor;
     }
 
-    public static String leerTexto(String mensaje) {
-        System.out.print(mensaje);
-        return scanner.nextLine();
-    }
 }

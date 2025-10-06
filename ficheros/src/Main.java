@@ -8,7 +8,11 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
+        String ruta = "datos/indicencia.txt";
+
         ControladorIncidencias.inciar();
+
+        //Incidencia problema = new Incidencia("Ruben")
 
         String cadena ="2025-09-16;14:01;excepcion test 1;usuario1";
 
