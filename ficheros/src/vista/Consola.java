@@ -1,28 +1,27 @@
 package vista;
 
+import controlador.ControladorIncidencias;
 import modelo.Incidencia;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static controlador.ControladorIncidencias.introducirDatos;
 
 public class Consola {
     private static List<Incidencia> incidencias = new ArrayList<>();
 
-    public static void primerPedir() {
+    public static void primerPedir(String nombreDelUsuario) throws IOException {
         int opcion;
         mostrarMenu();
-        //do {
+
             opcion = Escaner.leerEntero("Elige una opción: ");
 
             switch (opcion) {
-                case 1 -> introducirDatos();
+                case 1 -> ControladorIncidencias.introducirValidarDatos(nombreDelUsuario);
                 case 2 -> buscarPorUsuario();
                 case 3 -> buscarPorFecha();
                 default -> System.out.println("Opción no válida.");
             }
-        //} while (opcion != 0);
     }
 
     public static void mostrarMenu() {
@@ -31,6 +30,7 @@ public class Consola {
         System.out.println("2. Buscar indicencia por usuario");
         System.out.println("3. Buscar incidencia por fecha");
     }
+
 
     private static void buscarPorUsuario() {
         String nombreDelUsuario = Escaner.leerTexto("Ingrese el usuario a buscar: ");
@@ -64,30 +64,4 @@ public class Consola {
         }
     }
 }
-
-
-
-
-
-    /*private void listarTodas() {
-        if (incidencias.isEmpty()) {
-            System.out.println("No hay incidencias registradas.");
-        } else {
-            System.out.println("\n--- Lista de todas las incidencias ---");
-            for (Incidencia i : incidencias) {
-                System.out.println(i);
-            }
-        }
-    }
-
-    private void registrarIncidencia() {
-        String usuario = Escaner.leerTexto("Ingrese usuario: ");
-        String fecha = Escaner.leerTexto("Ingrese fecha (dd/mm/yyyy): ");
-        String hora = Escaner.leerTexto("Ingrese hora (HH:mm): ");
-        String tipo = Escaner.leerTexto("Ingrese tipo de incidencia: ");
-
-        incidencias.add(new Incidencia(usuario, fecha, hora, tipo));
-        System.out.println("Incidencia registrada");
-    }
-*/
 

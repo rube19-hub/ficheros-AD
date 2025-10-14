@@ -6,16 +6,14 @@ import java.util.ArrayList;
 
 public class Incidencia {
 
-    private ArrayList<Incidencia> lista;
     private String usuario;
     private LocalDate fecha;
     private LocalTime hora;
     private String tipo;
 
-    public Incidencia(LocalDate fecha, LocalTime hora, ArrayList<Incidencia> lista, String tipo, String usuario) {
+    public Incidencia(LocalDate fecha, LocalTime hora, String tipo, String usuario) {
         this.fecha = fecha;
         this.hora = hora;
-        this.lista = lista;
         this.tipo = tipo;
         this.usuario = usuario;
     }
@@ -39,14 +37,6 @@ public class Incidencia {
         this.hora = hora;
     }
 
-    public ArrayList<Incidencia> getLista() {
-        return lista;
-    }
-
-    public void setLista(ArrayList<Incidencia> lista) {
-        this.lista = lista;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -67,7 +57,6 @@ public class Incidencia {
     public String toString() {
         return "Incidencia{" +
                 "fecha=" + fecha +
-                ", lista=" + lista +
                 ", usuario='" + usuario + '\'' +
                 ", hora=" + hora +
                 ", tipo='" + tipo + '\'' +

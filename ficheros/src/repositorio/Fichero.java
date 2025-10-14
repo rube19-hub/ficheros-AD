@@ -5,6 +5,7 @@ import modelo.Incidencia;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Fichero {
 
@@ -29,63 +30,93 @@ public class Fichero {
                 '}';
     }
 
-    public static void escribirIncidencia(String ruta, Incidencia p) {
-        File file=null;
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
+//    public static void escribirIncidencia(String ruta, Incidencia i) throws IOException {
+//
+//
+//        FileWriter escritor = new FileWriter(ruta);
+//        String linea = i.getUsuario() + ";" + i.getTipo() + ";" + i.getFecha() + ";" + i.getHora();
+//
+//
+//        escritor.write(linea);
+//
+//    }
 
-        try {
-            file = new File(ruta);
-            fos = new FileOutputStream(file, true);
 
-            if (file.length() == 0) {
-                // si el fichero está vacío, escribo cabecera normal
-                oos = new ObjectOutputStream(fos);
-            } else {
-                // si ya hay datos, uso la versión sin cabecera
-                oos = new MiObjectOutputStream(fos);
-            }
+    /*public static ArrayList<Incidencia> buscarUsuario(String usuario, ListaIncidencia){
 
-            oos.writeObject(p);
-            System.out.println("Incidencia guardada: " + p);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (oos != null){
-                    oos.close();
-                }
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public String buscarDato(String dato, int columna){
-
-        return "";
-    }
-
-    public String buscarDato(LocalDate fechaInicial, LocalDate fechaFinal){
-
-        return "";
-    }
-
-    public ArrayList<String> leerFichero(String dato){
+        ArrayList<Incidencia> lista =new ListaIncidencia;
 
         try{
-            FileWriter Fichero = new FileWriter("datos/incidencia.txt");
-            Fichero.write(dato);
+            for(Incidencia item : datos)
+        }
+        return lista;
+    }*/
+
+    public String buscarFecha(LocalDate fechaInicial) {
+
+        return "";
+    }
+
+
+    public List<String> leerFichero() {
+        String cadena = "";
+        List<String> listaCadenas = new ArrayList<>();
+
+        FileReader fichero = null;
+        BufferedReader lector = null;
+
+        try {
+            fichero = new FileReader(ruta);
+            lector = new BufferedReader(fichero);
+
+            do {
+                cadena = lector.readLine();
+                if (cadena != null) {
+                    listaCadenas.add(cadena);
+                }
+            } while (cadena != null);
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("No se encuentra el archivo");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al leer el archivo");
+        } catch (Exception e) {
+            System.out.println("Error inesperado");
+        } finally {
+            try {
+                if (lector != null) {
+                    lector.close();
+                } else if (fichero != null) {
+                    fichero.close();
+                }
+
+            } catch (IOException e) {
+                System.out.println("Error al realizar la lectura");
+            }
         }
-        return null;
+
+        return listaCadenas;
+    }
+
+    public void escribirFichero(String dato) {
+
+        FileWriter fichero = null;
+
+        try {
+            fichero = new FileWriter(ruta);
+            fichero.write(dato + "\n");
+
+        } catch (IOException e) {
+            System.out.println("Error al escribir el archivo");
+
+        } finally {
+            try {
+                if (fichero != null) {
+                    fichero.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar el FileWriter");
+            }
+        }
     }
 }
