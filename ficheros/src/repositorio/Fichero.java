@@ -1,9 +1,12 @@
 package repositorio;
 
 import modelo.Incidencia;
+import modelo.ListaIncidencia;
+import vista.Escaner;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,31 +33,85 @@ public class Fichero {
                 '}';
     }
 
-//    public static void escribirIncidencia(String ruta, Incidencia i) throws IOException {
-//
-//
-//        FileWriter escritor = new FileWriter(ruta);
-//        String linea = i.getUsuario() + ";" + i.getTipo() + ";" + i.getFecha() + ";" + i.getHora();
-//
-//
-//        escritor.write(linea);
-//
-//    }
+    public static List<Incidencia> buscarUsuario() {
 
+        String usuarioParaBuscar = Escaner.leerTexto("Escribe que usuario quieres buscar: ");
+        Fichero fichero = new Fichero("datos/indicencia.txt");
 
-    /*public static ArrayList<Incidencia> buscarUsuario(String usuario, ListaIncidencia){
+        List<String> leido = fichero.leerFichero();
 
-        ArrayList<Incidencia> lista =new ListaIncidencia;
+        List<Incidencia> incidenciasEncontradas = new ArrayList<>();
 
-        try{
-            for(Incidencia item : datos)
+        for (String linea : leido) {
+
+            String[] partes = linea.split(";");
+
+            String fechaEnTexto = partes[0];
+            String horaEnTexto = partes[1];
+            String tipo = partes[2];
+            String usuario = partes[3];
+
+            if (usuarioParaBuscar.equals(usuario)) {
+                try {
+                    // convertir string a LocalDate y LocalTime
+
+                    LocalDate fecha = LocalDate.parse(fechaEnTexto);
+                    LocalTime hora = LocalTime.parse(horaEnTexto);
+
+                    Incidencia nuevaIncidencia = new Incidencia(fecha, hora, tipo, usuario);
+
+                    incidenciasEncontradas.add(nuevaIncidencia);
+
+                } catch (Exception e) {
+                    System.out.println("Error al procesar la línea: " + linea);
+                }
+            }
         }
-        return lista;
-    }*/
+        if (incidenciasEncontradas.isEmpty()) {
+            System.out.println("Este usuario no tiene incidencia");
+        }
+        System.out.println(incidenciasEncontradas);
+        return incidenciasEncontradas;
+    }
 
-    public String buscarFecha(LocalDate fechaInicial) {
+    public static List<Incidencia> buscarPorFecha() {
 
-        return "";
+        String fechaParaBuscar = Escaner.leerTexto("Escribe la fecha que quieres buscar: ");
+        Fichero fichero = new Fichero("datos/indicencia.txt");
+        List<String> leido = fichero.leerFichero();
+
+        List<Incidencia> incidenciasEncontradas = new ArrayList<>();
+
+        for (String linea : leido) {
+
+            String[] partes = linea.split(";");
+
+            String fechaEnTexto = partes[0];
+            String horaEnTexto = partes[1];
+            String tipo = partes[2];
+            String usuario = partes[3];
+
+            if (fechaParaBuscar.equals(fechaEnTexto)) {
+
+                try {
+                    // Convertir el string a localdate y localtime
+                    LocalDate fecha = LocalDate.parse(fechaEnTexto);
+                    LocalTime hora = LocalTime.parse(horaEnTexto);
+
+                    Incidencia nuevaIncidencia = new Incidencia(fecha, hora, tipo, usuario);
+
+                    incidenciasEncontradas.add(nuevaIncidencia);
+
+                } catch (Exception e) {
+                    System.out.println("Error al procesar la línea: " + linea);
+                }
+            }
+        }
+        if (incidenciasEncontradas.isEmpty()) {
+            System.out.println("Este usuario no tiene incidencia");
+        }
+        System.out.println(incidenciasEncontradas);
+        return incidenciasEncontradas;
     }
 
 

@@ -1,0 +1,6 @@
+2025-10-16;11:40;Numero no valido;holllllllll
+2025-10-16;11:42;Numero no valido;ffffff
+2025-10-16;11:43;Numero no valido;aaaaaaa
+2025-10-16;11:47;Numero muy pequeño;rgybdhbv
+2025-10-16;11:48;Numero muy grande;jff
+2025-10-16;12:12;Numero muy pequeño;i

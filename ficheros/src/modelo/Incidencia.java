@@ -2,6 +2,7 @@ package modelo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Incidencia {
@@ -51,6 +52,17 @@ public class Incidencia {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    //pasa la fecha y la hora de tipo localDate y localTime a string con un formato
+    public String formateador() {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaFormateada = fecha.format(formatoFecha);
+
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+        String horaFormateada = hora.format(formatoHora);
+
+        return fechaFormateada + ";" + horaFormateada + ";" + tipo + ";" + usuario + "\n";
     }
 
     @Override

@@ -1,6 +1,5 @@
 package vista;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Escaner {
@@ -22,5 +21,6 @@ public class Escaner {
         scanner.nextLine(); // limpiar buffer
         return valor;
     }
-
 }
+
+//escaner con IA

@@ -4,10 +4,11 @@ import modelo.Incidencia;
 import vista.Consola;
 import vista.Escaner;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import static servicio.ServicioFichero.guardarIncidencia;
 
 
 public class ControladorIncidencias {
@@ -30,9 +31,11 @@ public class ControladorIncidencias {
         try {
             if (num == 4) {
                 System.out.println("Numero correcto. no hay incidencia");
-            } else {
+            } else if (num > 4){
 
-                throw new IOException("Numero no valido");
+                throw new IOException("Numero muy grande");
+            }else if (num < 4){
+                throw new IOException("Numero muy pequeño");
             }
         } catch (IOException e) {
             String tipo = e.getMessage();
@@ -45,18 +48,7 @@ public class ControladorIncidencias {
                     nombreDelUsuario
             );
 
-            escribirIncidencia(ruta, incidencia);
-        }
-    }
-
-    public static void escribirIncidencia(String ruta, Incidencia i) throws IOException {
-
-        FileWriter escritor = new FileWriter(ruta, true);
-        try{
-            escritor.write(String.valueOf(i));
-            escritor.write("\n");
-        }finally {
-            escritor.close();
+            guardarIncidencia(ruta, incidencia);
         }
     }
 }
